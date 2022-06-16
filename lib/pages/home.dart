@@ -33,15 +33,14 @@ class _homeState extends State<home> {
   int page = 1;
 
 
-  //TO DO: Use.env for api key
+
   Future<bool> loadData() async{
     int loadedCount = 0;
     //load featured/trending movie and get the first one on the list
-    Response featured_response = await get(Uri.parse('${dotenv.env['base_url']}trending/all/day?api_key=${dotenv.env['api_key']}&language=en-US'));
-    if(featured_response.body.isNotEmpty){
-      Map featured_data = jsonDecode(featured_response.body);
-      featured = featured_data['results'][0];
-      trending = featured_data['results'];
+    Response trending_response = await get(Uri.parse('${dotenv.env['base_url']}trending/all/day?api_key=${dotenv.env['api_key']}&language=en-US'));
+    if(trending_response.body.isNotEmpty){
+      Map trending_data = jsonDecode(trending_response.body);
+      trending = trending_data['results'];
       loadedCount++;
     }
 
@@ -58,7 +57,7 @@ class _homeState extends State<home> {
     if(np_response.body.isNotEmpty){
       Map np_data = jsonDecode(np_response.body);
       np = np_data['results'];
-      print(np);
+      featured = np_data['results'][0];                                         //set featured as the first movie on the list
       loadedCount++;
     }
 

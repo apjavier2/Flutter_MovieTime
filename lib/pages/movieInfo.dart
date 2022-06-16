@@ -17,7 +17,7 @@ class movieInfo extends StatefulWidget {
 class _movieInfoState extends State<movieInfo> {
   Map movie = {};
 
-  //TO DO: Use.env for api key
+
   Future<bool> loadData() async{
     //load more information about the movie
     Response movie_response = await get(Uri.parse('${dotenv.env['base_url']}movie/${widget.movieId}?api_key=${dotenv.env['api_key']}&language=en-US'));
